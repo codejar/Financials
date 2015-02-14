@@ -4,20 +4,74 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
             xmlns:views="clr-namespace:Financials.Wpf.Views"
-            xmlns:services="clr-namespace:Financials.Common.Services;assembly=Financials.Common"
             mc:Ignorable="d" 
                  d:DataContext="{d:DesignInstance views:MarketDataViewer, IsDesignTimeCreatable=False}"
              d:DesignHeight="300" d:DesignWidth="300">
+    
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <DataTemplate DataType="{x:Type views:MarketDataTicker}">
+                <Grid>
+                    
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock 
+                        Grid.RowSpan="2"
+                        FontSize="20"
+                        Text="{Binding CurrencyPair.Code, Mode=OneTime}"/>
+
+
+
+                    <StackPanel Grid.Row="0" Grid.Column="1">
+
+                        <TextBlock Text="Buy"/>
+                        
+                        <TextBlock Margin="4 4 0 0"
+                        FontSize="16"
+                        Text="{Binding  Bid}"/>
+                    </StackPanel>
+
+
+                    <StackPanel  Grid.Row="1" Grid.Column="1">
+
+                        <TextBlock Text="Sell"/>
+
+                        <TextBlock 
+                            Margin="4 4 0 0"
+                        FontSize="16"
+                        Text="{Binding  Offer}"/>
+                    </StackPanel>
+
+                </Grid>
+                
+            </DataTemplate>
+        </ResourceDictionary>
+        
+    </UserControl.Resources>
+    
     <Grid>
         
-        <ItemsControl ItemsSource="{Binding CurrencyPairs}">
+        <ItemsControl ItemsSource="{Binding  Prices}">
+
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
             
-            
-            <ItemsControl.ItemTemplate>
+                <!--<ItemsControl.ItemTemplate>
                 <DataTemplate DataType="{x:Type services:CurrencyPair}">
                     <TextBlock Text="{Binding Code}"></TextBlock>
                 </DataTemplate>
-            </ItemsControl.ItemTemplate>
+            </ItemsControl.ItemTemplate>-->
             
         </ItemsControl>
  

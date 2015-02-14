@@ -1,41 +1,45 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using Financials.Common.Model;
+using System.Reactive.Disposables;
 using Financials.Common.Services;
 using System.Linq;
 
 namespace Financials.Wpf.Views
 {
-
-    public class MarketDataStream
+    public class MarketDataViewer: IDisposable
     {
-        public MarketDataStream(CurrencyPair currencyPair, IObservable<MarketData> marketDataObservable)
-        {
-        }
-    }
-
-    public class MarketDataViewer
-    {
-        private readonly IStaticData _staticData;
-        private readonly IMarketPriceService _marketPriceService;
-        private List<IObservable<MarketData>> _prices;
+        private readonly IEnumerable<MarketDataTicker> _prices;
+      
+        private readonly IDisposable _cleanUp;
 
         public MarketDataViewer(IStaticData staticData, IMarketPriceService marketPriceService)
         {
-            _staticData = staticData;
-            _marketPriceService = marketPriceService;
 
-            _prices = staticData.CurrencyPairs.Select(currencypair => marketPriceService.ObservePrice(currencypair.Code)).ToList();
+            _prices = staticData.CurrencyPairs.Select(currencypair =>
+            {
+                var observable = marketPriceService.ObservePrice(currencypair.Code);
+                return new MarketDataTicker(currencypair, observable);
 
+            }).ToList();
 
+            _cleanUp = Disposable.Create(() =>
+            {
+                _prices.OfType<IDisposable>().ForEach(d=>d.Dispose());
+            });
 
         }
 
-        public CurrencyPair[] CurrencyPairs
+        public IEnumerable<MarketDataTicker> Prices
         {
-            get { return _staticData.CurrencyPairs; }
+            get { return _prices; }
         }
 
+
+
+        public void Dispose()
+        {
+          _cleanUp.Dispose();
+        }
     }
 }

@@ -13,6 +13,7 @@ namespace Financials.Common.Services
         
         public MarketPriceService(IStaticData staticData)
         {
+            //generate hot observable for all currency pairs
             foreach (var item in staticData.CurrencyPairs)
             {
                 _prices[item.Code] = GenerateStream(item);

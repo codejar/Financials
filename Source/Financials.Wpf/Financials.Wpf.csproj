@@ -113,6 +113,7 @@
       <DependentUpon>LiveTradesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LiveTradesViewer.cs" />
+    <Compile Include="Views\MarketDataTicker.cs" />
     <Compile Include="Views\MarketDataViewer.cs" />
     <Compile Include="Views\MenuView.xaml.cs">
       <DependentUpon>MenuView.xaml</DependentUpon>

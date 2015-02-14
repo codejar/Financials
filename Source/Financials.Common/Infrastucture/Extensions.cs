@@ -1,4 +1,5 @@
-﻿using System.Reactive;
+﻿using System.Collections.Generic;
+using System.Reactive;
 using System.Reactive.Linq;
 using System;
 
@@ -15,7 +16,19 @@ namespace System
 
         public static bool Contains(this string source, string toCheck, StringComparison comp)
         {
+            if (string.IsNullOrEmpty(source)) return false;
             return source.IndexOf(toCheck, comp) >= 0;
+        }
+
+        public static void ForEach<T>(this IEnumerable<T> source, Action<T> action )
+        {
+            if (source == null) throw new ArgumentNullException("source");
+            if (action == null) throw new ArgumentNullException("action");
+          
+            foreach (var item in source)
+            {
+                action(item);
+            }
         }
     }
 }
