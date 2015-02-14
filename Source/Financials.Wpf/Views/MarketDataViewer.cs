@@ -36,7 +36,6 @@ namespace Financials.Wpf.Views
         }
 
 
-
         public void Dispose()
         {
           _cleanUp.Dispose();

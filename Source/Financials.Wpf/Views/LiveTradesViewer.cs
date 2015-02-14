@@ -31,14 +31,13 @@ namespace Financials.Wpf.Views
                                 .StartWith(Unit.Default)
                                 .Subscribe(_ => ApplyFilter());
 
-            var loader = tradeService.Trades
-                .Connect(trade => trade.Status == TradeStatus.Live) //prefilter live trades only
+            var loader = tradeService.Trades.Connect(trade => trade.Status == TradeStatus.Live) //prefilter live trades only
                 .Filter(_filter) // apply user filter
                 .Transform(trade => new TradeProxy(trade),new ParallelisationOptions(ParallelType.Ordered,5))
                 .Sort(SortExpressionComparer<TradeProxy>.Descending(t => t.Timestamp),SortOptimisations.ComparesImmutableValuesOnly)
                 .ObserveOn(schedulerProvider.Dispatcher)
-                .Bind(_data)   // update observable collection bindings
-                .DisposeMany() //since TradeProxy is disposable dispose when no longer required
+                .Bind(_data)    // update observable collection bindings
+                .DisposeMany()  //since TradeProxy is disposable dispose when no longer required
                 .Subscribe();
 
             _cleanUp = new CompositeDisposable(loader, _filter, filterApplier);
@@ -62,12 +61,7 @@ namespace Financials.Wpf.Views
         public string SearchText
         {
             get { return _searchText; }
-            set
-            {
-                if (_searchText == value) return;
-                _searchText = value;
-                OnPropertyChanged();
-            }
+            set  { SetAndRaise(ref _searchText,value);}
         }
 
         public IObservableCollection<TradeProxy> Data

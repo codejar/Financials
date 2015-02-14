@@ -17,7 +17,7 @@ namespace Financials.Common.Services
             //generate hot observable for all currency pairs
             foreach (var item in staticData.CurrencyPairs)
             {
-                _prices[item.Code] = GenerateStream(item);
+                _prices[item.Code] = GenerateStream(item).Replay(1).RefCount();
             }
         }
 
@@ -37,10 +37,10 @@ namespace Financials.Common.Services
                         observer.OnNext(initial);
 
                         var random = new Random();
-                        var period = random.Next(250, 1500);
+
 
                         //for a given period, move prices by up to 5 pips
-                        return Observable.Interval(TimeSpan.FromMilliseconds(period))
+                        return Observable.Interval(TimeSpan.FromSeconds(1 / (double)currencyPair.TickFrequency))
                             .Select(_ =>  random.Next(1, 5))
                             .Subscribe(pips =>
                             {

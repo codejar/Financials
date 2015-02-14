@@ -1,7 +1,6 @@
 ﻿using System;
 using Financials.Common.Infrastucture;
 using Financials.Common.Model;
-using Financials.Common.Services;
 
 namespace Financials.Wpf.Views
 {

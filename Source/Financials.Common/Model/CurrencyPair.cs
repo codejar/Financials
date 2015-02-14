@@ -7,11 +7,11 @@ namespace Financials.Common.Model
         private readonly string _code;
         private readonly decimal _startingPrice;
         private readonly int _decimalPlaces;
-        private readonly int _tickFrequency;
+        private readonly decimal _tickFrequency;
         private readonly int _defaultSpread;
         private readonly decimal _pipSize;
 
-        public CurrencyPair(string code, decimal startingPrice, int decimalPlaces = 4, int tickFrequency = 10, int defaultSpread = 8)
+        public CurrencyPair(string code, decimal startingPrice, int decimalPlaces, decimal tickFrequency, int defaultSpread = 8)
         {
             _code = code;
             _startingPrice = startingPrice;
@@ -36,7 +36,7 @@ namespace Financials.Common.Model
             get { return _decimalPlaces; }
         }
 
-        public int TickFrequency
+        public decimal TickFrequency
         {
             get { return _tickFrequency; }
         }
