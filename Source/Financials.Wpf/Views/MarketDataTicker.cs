@@ -24,6 +24,7 @@ namespace Financials.Wpf.Views
             _cleanUp = marketDataObservable.
                 Subscribe(md =>
                 {
+                    Trend = Bid > md.Bid ? Trend.Up : Trend.Down;
                     Bid = md.Bid;
                     Offer = md.Offer;
                 });

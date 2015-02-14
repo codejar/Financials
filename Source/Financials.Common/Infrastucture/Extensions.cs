@@ -2,6 +2,7 @@
 using System.Reactive;
 using System.Reactive.Linq;
 using System;
+using Financials.Common.Infrastucture;
 
 // ReSharper disable once CheckNamespace
 namespace System
@@ -30,5 +31,6 @@ namespace System
                 action(item);
             }
         }
+
     }
 }

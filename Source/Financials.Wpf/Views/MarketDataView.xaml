@@ -11,7 +11,15 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <DataTemplate DataType="{x:Type views:MarketDataTicker}">
-                <Grid>
+                <Grid Margin="8">
+                    
+                    <Grid.Resources>
+                        <Style TargetType="{x:Type TextBlock}">
+                            
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                        </Style>
+                        
+                    </Grid.Resources>
                     
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -24,17 +32,17 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock 
-                        Grid.RowSpan="2"
+                        Grid.ColumnSpan="2"
                         FontSize="20"
                         Text="{Binding CurrencyPair.Code, Mode=OneTime}"/>
 
 
 
-                    <StackPanel Grid.Row="0" Grid.Column="1">
+                    <StackPanel Grid.Row="1" Grid.Column="0">
 
                         <TextBlock Text="Buy"/>
                         
-                        <TextBlock Margin="4 4 0 0"
+                        <TextBlock  Margin="4 4 0 0"
                         FontSize="16"
                         Text="{Binding  Bid}"/>
                     </StackPanel>

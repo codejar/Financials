@@ -11,14 +11,14 @@ namespace Financials.Common.Services
         private readonly int _defaultSpread;
         private readonly decimal _pipSize;
 
-        public CurrencyPair(string code, decimal startingPrice, int decimalPlaces=4, int tickFrequency=10, int defaultSpread=10)
+        public CurrencyPair(string code, decimal startingPrice, int decimalPlaces=4, int tickFrequency=10, int defaultSpread=8)
         {
             _code = code;
             _startingPrice = startingPrice;
             _decimalPlaces = decimalPlaces;
             _tickFrequency = tickFrequency;
             _defaultSpread = defaultSpread;
-            _pipSize = (decimal)Math.Pow(10, -4);
+            _pipSize = (decimal)Math.Pow(10, -decimalPlaces);
         }
 
         public string Code

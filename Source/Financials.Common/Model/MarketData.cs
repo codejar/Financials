@@ -71,6 +71,26 @@ namespace Financials.Common.Model
             return new MarketData(left.Instrument, bid, offer);
         }
 
+        public static bool operator >=(MarketData left, MarketData right)
+        {
+            return left.Bid >= right.Bid;
+        }
+
+        public static bool operator <=(MarketData left, MarketData right)
+        {
+            return left.Bid <= right.Bid;
+        }
+
+        public static bool operator >(MarketData left, MarketData right)
+        {
+            return left.Bid > right.Bid;
+        }
+
+        public static bool operator <(MarketData left, MarketData right)
+        {
+            return left.Bid < right.Bid;
+        }
+
         public static bool operator ==(MarketData left, MarketData right)
         {
             return left.Equals(right);
