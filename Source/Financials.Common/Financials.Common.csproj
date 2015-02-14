@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="Infrastucture\SchedulerProvider.cs" />
     <Compile Include="Model\BuyOrSell.cs" />
+    <Compile Include="Model\CurrencyPair.cs" />
     <Compile Include="Model\MarketData.cs" />
     <Compile Include="Services\IMarketPriceService.cs" />
     <Compile Include="Services\INearToMarketService.cs" />

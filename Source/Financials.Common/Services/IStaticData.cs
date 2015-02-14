@@ -1,3 +1,5 @@
+using Financials.Common.Model;
+
 namespace Financials.Common.Services
 {
     public interface IStaticData
