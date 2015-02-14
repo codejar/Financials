@@ -12,7 +12,7 @@ namespace Financials.Common.Services
     {
         private readonly IDisposable _job;
 
-        public TradePriceUpdateJob(ITradeService tradeService, IMarketPriceService marketPriceService)
+        public TradePriceUpdateJob(ITradeService tradeService, IMarketDataService marketDataService)
         {
             _job = tradeService.Trades.Connect()
                 .Filter(trade => trade.Status == TradeStatus.Live)
@@ -23,7 +23,7 @@ namespace Financials.Common.Services
                                    decimal latestPrice = 0;
 
                                    //subscribe to price and update trades with the latest price
-                                   var priceHasChanged = marketPriceService.ObservePrice(groupedData.Key)
+                                   var priceHasChanged = marketDataService.Watch(groupedData.Key)
                                        .Synchronize(locker)
                                        .Subscribe(price =>
                                                   {

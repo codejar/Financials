@@ -22,7 +22,7 @@ namespace Financials.Wpf.Infrastucture
             For<IObjectProvider>().Singleton().Use<ObjectProvider>();
             For<ITradeService>().Singleton().Use<TradeService>();
             For<IStaticData>().Singleton().Use<StaticData>();
-            For<IMarketPriceService>().Singleton().Use<MarketPriceService>();
+            For<IMarketDataService>().Singleton().Use<MarketDataService>();
             For<INearToMarketService>().Singleton().Use<NearToMarketService>();
             
 
