@@ -35,13 +35,8 @@ namespace Financials.Common.Model
                                OnPropertyChanged("MarketPrice");
                                OnPropertyChanged("PercentFromMarket");
                            });
-        
-            _cleanUp = Disposable.Create(() =>
-                                         {
-                                             recentIndicator.Dispose();
-                                             priceRefresher.Dispose();
-                                         });
 
+            _cleanUp = new CompositeDisposable(recentIndicator, priceRefresher);
         }
 
         public decimal MarketPrice

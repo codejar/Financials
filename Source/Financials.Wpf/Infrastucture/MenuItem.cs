@@ -23,7 +23,7 @@ namespace Financials.Wpf.Infrastucture
         {
             _title = title;
             _link = link ?? Enumerable.Empty<Link>();
-            _command = new Command(action); ;
+            _command = new AnotherCommandImplementation(action); ;
         }
 
 
@@ -33,7 +33,7 @@ namespace Financials.Wpf.Infrastucture
             _title = title;
             _description = description;
             _link = link ?? Enumerable.Empty<Link>();
-            _command = new Command(action); ;
+            _command = new AnotherCommandImplementation(action); ;
         }
         
 

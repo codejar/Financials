@@ -15,9 +15,7 @@
             
             <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="{x:Type services:CurrencyPair}">
-
                     <TextBlock Text="{Binding Code}"></TextBlock>
-
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
             

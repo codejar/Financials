@@ -26,7 +26,7 @@ namespace Financials.Wpf.Infrastucture
             For<INearToMarketService>().Singleton().Use<NearToMarketService>();
             
 
-            For<UnhandledExceptionEventHandler>().Singleton();
+           
             For<TradePriceUpdateJob>().Singleton();
 
             Scan(scanner => scanner.LookForRegistries());

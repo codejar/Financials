@@ -1,17 +1,25 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using System.Reactive.Linq;
+using Financials.Common.Model;
 using Financials.Common.Services;
 using System.Linq;
 
 namespace Financials.Wpf.Views
 {
+
+    public class MarketDataStream
+    {
+        public MarketDataStream(CurrencyPair currencyPair, IObservable<MarketData> marketDataObservable)
+        {
+        }
+    }
+
     public class MarketDataViewer
     {
         private readonly IStaticData _staticData;
         private readonly IMarketPriceService _marketPriceService;
-        private List<IObservable<decimal>> _prices;
+        private List<IObservable<MarketData>> _prices;
 
         public MarketDataViewer(IStaticData staticData, IMarketPriceService marketPriceService)
         {

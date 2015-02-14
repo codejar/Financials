@@ -27,7 +27,8 @@ namespace Financials.Common.Services
                                        .Synchronize(locker)
                                        .Subscribe(price =>
                                                   {
-                                                      latestPrice = price;
+                                                      //TODO: Bid or offer depending on Buy/Sell
+                                                      latestPrice = price.Bid;
                                                       UpdateTradesWithPrice(groupedData.Cache.Items, latestPrice);
                                                   });
                                   

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reactive;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using DynamicData;
@@ -26,10 +27,9 @@ namespace Financials.Wpf.Views
             _logger = logger;
 
             var filterApplier = this.ObserveChanges()
-                                .Throttle(TimeSpan.FromMilliseconds(250))
-                                .StartWith()
+                                .Throttle(TimeSpan.FromMilliseconds(250)).ToUnit()   
+                                .StartWith(Unit.Default)
                                 .Subscribe(_ => ApplyFilter());
-            ApplyFilter();
 
             var loader = tradeService.Trades
                 .Connect(trade => trade.Status == TradeStatus.Live) //prefilter live trades only

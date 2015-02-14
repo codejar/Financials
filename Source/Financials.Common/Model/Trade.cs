@@ -17,6 +17,7 @@ namespace Financials.Common.Model
         public decimal MarketPrice { get; private set; }
         public decimal PercentFromMarket { get; private set; }
         public decimal Amount { get; private set; }
+        public BuyOrSell BuyOrSell { get; private set; }
 
         public Trade(Trade trade, TradeStatus status)
         {

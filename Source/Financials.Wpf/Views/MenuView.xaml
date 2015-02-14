@@ -14,6 +14,13 @@
 
 
             <ItemsControl   MinWidth="300" ItemsSource="{Binding Menu}">
+
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+                
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     

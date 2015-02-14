@@ -70,9 +70,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infrastucture\SchedulerProvider.cs" />
-    <Compile Include="Model\TimePeriod.cs" />
-    <Compile Include="Model\TradesByPercentDiff.cs" />
-    <Compile Include="Model\TradesByTime.cs" />
+    <Compile Include="Model\BuyOrSell.cs" />
+    <Compile Include="Model\MarketData.cs" />
     <Compile Include="Services\IMarketPriceService.cs" />
     <Compile Include="Services\INearToMarketService.cs" />
     <Compile Include="Infrastucture\NotifyPropertyChangedBase.cs" />

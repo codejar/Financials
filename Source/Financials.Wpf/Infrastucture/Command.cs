@@ -3,30 +3,63 @@ using System.Windows.Input;
 
 namespace Financials.Wpf.Infrastucture
 {
-    public class Command : ICommand
+    /// <summary>
+    /// No WPF project is complete without it's own version of this.
+    /// </summary>
+    public class AnotherCommandImplementation : ICommand
     {
-        private readonly Action _action;
+        private readonly Action<object> _execute;
+        private readonly Func<object, bool> _canExecute;
 
 
-        public Command(Action action)
+        public AnotherCommandImplementation(Action execute)
+            : this(obj => execute(), null)
         {
-            _action = action;
         }
 
-        #region Implementation of ICommand
+        public AnotherCommandImplementation(Action execute, Func<bool> canExecute)
+            : this(obj => execute(), obj => canExecute())
+        {
+        }
+
+        public AnotherCommandImplementation(Action<object> execute)
+            : this(execute, null)
+        {
+        }
+
+        public AnotherCommandImplementation(Action<object> execute, Func<object, bool> canExecute)
+        {
+            if (execute == null) throw new ArgumentNullException("execute");
+
+            _execute = execute;
+            _canExecute = canExecute ?? (x => true);
+        }
 
         public bool CanExecute(object parameter)
         {
-            return true;
+            return _canExecute(parameter);
         }
 
         public void Execute(object parameter)
         {
-            _action();
+            _execute(parameter);
         }
 
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler CanExecuteChanged
+        {
+            add
+            {
+                CommandManager.RequerySuggested += value;
+            }
+            remove
+            {
+                CommandManager.RequerySuggested -= value;
+            }
+        }
 
-        #endregion
+        public void Refresh()
+        {
+            CommandManager.InvalidateRequerySuggested();
+        }
     }
 }

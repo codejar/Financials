@@ -1,9 +1,13 @@
 ﻿using System;
+using Financials.Common.Model;
 
 namespace Financials.Common.Services
 {
+
+
     public interface IMarketPriceService
     {
-        IObservable<decimal> ObservePrice(string currencyPair);
+        IObservable<MarketData> ObservePrice(string currencyPair);
     }
+    
 }

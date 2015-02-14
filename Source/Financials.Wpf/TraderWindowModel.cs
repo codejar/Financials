@@ -27,7 +27,7 @@ namespace Financials.Wpf
         {
             _objectProvider = objectProvider;
             _interTabClient = new InterTabClient(traderWindowFactory);
-            _showMenu =  new Command(OnShowMenu);
+            _showMenu = new AnotherCommandImplementation(OnShowMenu);
 
             var menuController = _data.ToObservableChangeSet(vc => vc.Id)
                                         .Filter(vc => vc.Content is MenuItems)
