@@ -15,7 +15,6 @@
                     
                     <Grid.Resources>
                         <Style TargetType="{x:Type TextBlock}">
-                            
                             <Setter Property="HorizontalAlignment" Value="Center"/>
                         </Style>
                         
@@ -29,6 +28,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
                     <TextBlock 
@@ -36,15 +36,13 @@
                         FontSize="20"
                         Text="{Binding CurrencyPair.Code, Mode=OneTime}"/>
 
-
-
                     <StackPanel Grid.Row="1" Grid.Column="0">
 
                         <TextBlock Text="Buy"/>
                         
                         <TextBlock  Margin="4 4 0 0"
-                        FontSize="16"
-                        Text="{Binding  Bid}"/>
+                                FontSize="16"
+                                Text="{Binding  Bid}"/>
                     </StackPanel>
 
 
@@ -53,9 +51,24 @@
                         <TextBlock Text="Sell"/>
 
                         <TextBlock 
-                            Margin="4 4 0 0"
-                        FontSize="16"
-                        Text="{Binding  Offer}"/>
+                                Margin="4 4 0 0"
+                                FontSize="16"
+                                Text="{Binding  Offer}"/>
+                    </StackPanel>
+
+                    <StackPanel
+                        Width="50"
+                        VerticalAlignment="Center"
+                                Grid.Row="0" Grid.RowSpan="2" Grid.Column="2">
+
+                        <TextBlock Text="trend"/>
+
+
+                        <TextBlock 
+                                Margin="4 4 0 0"
+                                FontSize="16"
+                                Text="{Binding  Trend}"/>
+
                     </StackPanel>
 
                 </Grid>
@@ -73,14 +86,7 @@
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal"/>
                 </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            
-                <!--<ItemsControl.ItemTemplate>
-                <DataTemplate DataType="{x:Type services:CurrencyPair}">
-                    <TextBlock Text="{Binding Code}"></TextBlock>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>-->
-            
+            </ItemsControl.ItemsPanel>            
         </ItemsControl>
  
             
