@@ -10,13 +10,6 @@ namespace Financials.Common.Infrastucture
         public event PropertyChangedEventHandler PropertyChanged;
 
 
-        protected virtual void SetAndRaise<T>(ref T backingField,  T newValue, [CallerMemberName] string propertyName = null)
-        {
-            if (EqualityComparer<T>.Default.Equals(backingField, newValue)) return;
-            backingField = newValue;
-           // ReSharper disable once ExplicitCallerInfoArgument
-            OnPropertyChanged(propertyName);
-        }
 
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -25,6 +18,12 @@ namespace Financials.Common.Infrastucture
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
 
-
+        protected virtual void SetAndRaise<T>(ref T backingField, T newValue, [CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(backingField, newValue)) return;
+            backingField = newValue;
+            // ReSharper disable once ExplicitCallerInfoArgument
+            OnPropertyChanged(propertyName);
+        }
     }
 }
