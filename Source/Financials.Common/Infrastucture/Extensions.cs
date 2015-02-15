@@ -30,5 +30,13 @@ namespace System
             }
         }
 
+         public static bool NextBoolean(this Random source)
+        {
+            if (source == null) throw new ArgumentNullException("source");
+             return source.NextDouble() > 0.5;
+
+        }
+
+
     }
 }

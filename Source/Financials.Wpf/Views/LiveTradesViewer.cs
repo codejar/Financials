@@ -34,7 +34,7 @@ namespace Financials.Wpf.Views
             var loader = tradeService.Trades.Connect(trade => trade.Status == TradeStatus.Live) //prefilter live trades only
                 .Filter(_filter) // apply user filter
                 .Transform(trade => new TradeProxy(trade),new ParallelisationOptions(ParallelType.Ordered,5))
-                .Sort(SortExpressionComparer<TradeProxy>.Descending(t => t.Timestamp),SortOptimisations.ComparesImmutableValuesOnly)
+                .Sort(SortExpressionComparer<TradeProxy>.Descending(t => t.Trade.Timestamp),SortOptimisations.ComparesImmutableValuesOnly)
                 .ObserveOn(schedulerProvider.Dispatcher)
                 .Bind(_data)    // update observable collection bindings
                 .DisposeMany()  //since TradeProxy is disposable dispose when no longer required

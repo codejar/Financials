@@ -65,15 +65,20 @@
             <DataGrid.Columns>
                 <DataGridTextColumn
                                             Header="Customer"  
-                                            Binding="{Binding Customer,Mode=OneWay}"/>
+                                            Binding="{Binding Trade.Customer,Mode=OneWay}"/>
 
                 <DataGridTextColumn 
                                             Header="Currency Pair" 
-                                            Binding="{Binding CurrencyPair,Mode=OneWay}"/>
+                                            Binding="{Binding Trade.CurrencyPair,Mode=OneWay}"/>
+
+
+                <DataGridTextColumn 
+                                            Header="Buy / Sell" 
+                                            Binding="{Binding Trade.BuyOrSell,Mode=OneWay}"/>
 
                 <DataGridTextColumn         Header="Amount" 
 
-                                            Binding="{Binding Amount,Mode=OneWay, StringFormat='N'}">
+                                            Binding="{Binding Trade.Amount,Mode=OneWay, StringFormat='N'}">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Right" />
@@ -84,7 +89,7 @@
                 <DataGridTextColumn 
                                             Header="Trade Price" 
                                             TextBlock.TextAlignment="Right"
-                                            Binding="{Binding  TradePrice,Mode=OneWay}"/>
+                                            Binding="{Binding  Trade.TradePrice,Mode=OneWay}"/>
                 <DataGridTextColumn 
                                             Header="Market Price" 
                                             TextBlock.TextAlignment="Right"
@@ -96,11 +101,11 @@
 
                 <DataGridTextColumn 
                                             Header="Status" 
-                                            Binding="{Binding  Status,Mode=OneWay}"/>
+                                            Binding="{Binding  Trade.Status,Mode=OneWay}"/>
 
                 <DataGridTextColumn 
                                             Header="Created At" 
-                                            Binding="{Binding   Timestamp,Mode=OneWay}"/>
+                                            Binding="{Binding   Trade.Timestamp,Mode=OneWay}"/>
             </DataGrid.Columns>
 
         </DataGrid>

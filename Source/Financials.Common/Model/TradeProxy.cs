@@ -44,6 +44,11 @@ namespace Financials.Common.Model
             get { return _trade.MarketPrice; }
         }
 
+        public decimal PercentFromMarket
+        {
+            get { return _trade.PercentFromMarket; }
+        }
+
         public bool Recent
         {
             get { return _recent; }
@@ -55,50 +60,10 @@ namespace Financials.Common.Model
             }
         }
 
-        #region Delegating Members
-        
-        public long Id
+        public Trade Trade
         {
-            get { return _trade.Id; }
+            get { return _trade; }
         }
-
-        public string CurrencyPair
-        {
-            get { return _trade.CurrencyPair; }
-        }
-
-        public string Customer
-        {
-            get { return _trade.Customer; }
-        }
-
-        public decimal Amount
-        {
-            get { return _trade.Amount; }
-        }
-
-        public TradeStatus Status
-        {
-            get { return _trade.Status; }
-        }
-
-        public DateTime Timestamp
-        {
-            get { return _trade.Timestamp; }
-        }
-
-        public decimal TradePrice
-        {
-            get { return _trade.TradePrice; }
-        }
-
-
-        public decimal PercentFromMarket
-        {
-            get { return _trade.PercentFromMarket; }
-        }
-
-        #endregion
 
         #region Equaility Members
 

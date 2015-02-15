@@ -39,14 +39,16 @@ namespace Financials.Common.Services
                 var bank = _staticData.Customers[_random.Next(0, _staticData.Customers.Length)];
                 var pair = _staticData.CurrencyPairs[_random.Next(0, _staticData.CurrencyPairs.Length)];
                 var amount = (_random.Next(1, 2000) / 2) * (10 ^ _random.Next(1, 5));
+                var buySell = _random.NextBoolean() ? BuyOrSell.Buy : BuyOrSell.Sell;
+                
                 if (initialLoad)
                 {
                     var status = _random.NextDouble() > 0.5 ? TradeStatus.Live : TradeStatus.Closed;
                     var seconds = _random.Next(1, 60 * 60 * 24);
                     var time = DateTime.Now.AddSeconds(-seconds);
-                    return new Trade(id, bank, pair.Code, status, GererateRandomPrice(pair), amount, timeStamp: time);
+                    return new Trade(id, bank, pair.Code, status, buySell, GererateRandomPrice(pair, buySell), amount, timeStamp: time);
                 }
-                return new Trade(id, bank, pair.Code, TradeStatus.Live, GererateRandomPrice(pair), amount);
+                return new Trade(id, bank, pair.Code, TradeStatus.Live, buySell, GererateRandomPrice(pair, buySell), amount);
             };
 
 
@@ -59,7 +61,7 @@ namespace Financials.Common.Services
         }
 
 
-        private decimal GererateRandomPrice(CurrencyPair currencyPair)
+        private decimal GererateRandomPrice(CurrencyPair currencyPair,BuyOrSell buyOrSell)
         {
 
             var price = _latestPrices.Lookup(currencyPair.Code)
@@ -69,18 +71,7 @@ namespace Financials.Common.Services
             //generate percent price 1-100 pips away from the inital market
             var pipsFromMarket = _random.Next(1, 100);
             var adjustment = Math.Round(pipsFromMarket * currencyPair.PipSize, currencyPair.DecimalPlaces);
-            var positive = _random.NextDouble() > 0.5;
-
-            return positive ? price + adjustment : price - adjustment;
-
-            ////generate percent price 1-100% away from the inital market
-            //var pcFromMarket = _random.Next(1, 1000)/(decimal) 5000;
-
-            //var positive = _random.NextDouble() > 0.5;
-
-            //return positive
-            //    ? price + (pcFromMarket * price)
-            //    : price - (pcFromMarket * price);
+            return buyOrSell==BuyOrSell.Sell ? price + adjustment : price - adjustment;
         }
 
         public void Dispose()
