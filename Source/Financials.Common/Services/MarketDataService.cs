@@ -43,7 +43,6 @@ namespace Financials.Common.Services
                             .Subscribe(pips =>
                             {
                                 //move up or down between 1 and 5 pips
-
                                 var adjustment = Math.Round(pips * currencyPair.PipSize,currencyPair.DecimalPlaces);
                                 currentPrice = random.NextDouble() > 0.5
                                                 ? currentPrice + adjustment

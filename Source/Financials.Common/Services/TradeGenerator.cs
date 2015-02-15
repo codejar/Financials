@@ -11,7 +11,6 @@ namespace Financials.Common.Services
     {
         private readonly Random _random= new Random();
         private readonly IStaticData _staticData;
-        private readonly IMarketDataService _marketDataService;
         private readonly IDisposable _cleanUp;
         private readonly IDictionary<string, MarketData> _latestPrices = new Dictionary<string, MarketData>();
         private readonly object _locker = new object();
@@ -20,7 +19,6 @@ namespace Financials.Common.Services
         public TradeGenerator(IStaticData staticData, IMarketDataService marketDataService)
         {
             _staticData = staticData;
-            _marketDataService = marketDataService;
 
             //keep track of the latest price so we can generate trades are a reasonable distance from the market
             _cleanUp = staticData.CurrencyPairs
@@ -67,14 +65,22 @@ namespace Financials.Common.Services
             var price = _latestPrices.Lookup(currencyPair.Code)
                                 .ConvertOr(md=>md.Bid, () => currencyPair.InitialPrice);
 
-            //generate percent price 1-10% away from the inital market
-            var pcFromMarket = _random.Next(1, 1000)/(decimal) 5000;
 
+            //generate percent price 1-100 pips away from the inital market
+            var pipsFromMarket = _random.Next(1, 100);
+            var adjustment = Math.Round(pipsFromMarket * currencyPair.PipSize, currencyPair.DecimalPlaces);
             var positive = _random.NextDouble() > 0.5;
 
-            return positive
-                ? price + (pcFromMarket * price)
-                : price - (pcFromMarket * price);
+            return positive ? price + adjustment : price - adjustment;
+
+            ////generate percent price 1-100% away from the inital market
+            //var pcFromMarket = _random.Next(1, 1000)/(decimal) 5000;
+
+            //var positive = _random.NextDouble() > 0.5;
+
+            //return positive
+            //    ? price + (pcFromMarket * price)
+            //    : price - (pcFromMarket * price);
         }
 
         public void Dispose()

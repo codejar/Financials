@@ -46,7 +46,8 @@ namespace Financials.Common.Model
         public void SetMarketPrice(decimal marketPrice)
         {
             MarketPrice = marketPrice;
-            PercentFromMarket = Math.Round((TradePrice - MarketPrice / ((TradePrice + MarketPrice) / 2)) * 100,2); 
+   
+            PercentFromMarket = Math.Round(((TradePrice - MarketPrice) / MarketPrice) * 100, 2);
             ;
             _marketPriceChangedSubject.OnNext(marketPrice);
         }

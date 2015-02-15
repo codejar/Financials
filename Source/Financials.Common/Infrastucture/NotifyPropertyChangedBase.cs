@@ -14,7 +14,7 @@ namespace Financials.Common.Infrastucture
         {
             if (EqualityComparer<T>.Default.Equals(backingField, newValue)) return;
             backingField = newValue;
-// ReSharper disable once ExplicitCallerInfoArgument
+           // ReSharper disable once ExplicitCallerInfoArgument
             OnPropertyChanged(propertyName);
         }
 
