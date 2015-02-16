@@ -57,6 +57,9 @@
     <Reference Include="MahApps.Metro">
       <HintPath>..\packages\MahApps.Metro.1.0.1-ALPHA052\lib\net45\MahApps.Metro.dll</HintPath>
     </Reference>
+    <Reference Include="MaterialDesignColors">
+      <HintPath>..\packages\MaterialDesignColors.0.0.0.0\lib\net45\MaterialDesignColors.dll</HintPath>
+    </Reference>
     <Reference Include="StructureMap">
       <HintPath>..\packages\structuremap.3.1.4.143\lib\net40\StructureMap.dll</HintPath>
     </Reference>
@@ -109,6 +112,9 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="TabSet.cs" />
+    <Compile Include="Views\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LiveTradesView.xaml.cs">
       <DependentUpon>LiveTradesView.xaml</DependentUpon>
     </Compile>
@@ -147,6 +153,24 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+    <Resource Include="Resources\Roboto\Roboto-Black.ttf" />
+    <Resource Include="Resources\Roboto\Roboto-BlackItalic.ttf" />
+    <Resource Include="Resources\Roboto\Roboto-Bold.ttf" />
+    <Resource Include="Resources\Roboto\Roboto-BoldItalic.ttf" />
+    <Resource Include="Resources\Roboto\Roboto-Italic.ttf" />
+    <Resource Include="Resources\Roboto\Roboto-Light.ttf" />
+    <Resource Include="Resources\Roboto\Roboto-LightItalic.ttf" />
+    <Resource Include="Resources\Roboto\Roboto-Medium.ttf" />
+    <Resource Include="Resources\Roboto\Roboto-MediumItalic.ttf" />
+    <Resource Include="Resources\Roboto\Roboto-Regular.ttf" />
+    <Resource Include="Resources\Roboto\Roboto-Thin.ttf" />
+    <Resource Include="Resources\Roboto\Roboto-ThinItalic.ttf" />
+    <Resource Include="Resources\Roboto\RobotoCondensed-Bold.ttf" />
+    <Resource Include="Resources\Roboto\RobotoCondensed-BoldItalic.ttf" />
+    <Resource Include="Resources\Roboto\RobotoCondensed-Italic.ttf" />
+    <Resource Include="Resources\Roboto\RobotoCondensed-Light.ttf" />
+    <Resource Include="Resources\Roboto\RobotoCondensed-LightItalic.ttf" />
+    <Resource Include="Resources\Roboto\RobotoCondensed-Regular.ttf" />
     <None Include="_packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -159,6 +183,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\About.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -176,6 +204,9 @@
       <Project>{0cf230f0-1a2d-4843-8f36-62f831e8cb23}</Project>
       <Name>Financials.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Logo2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

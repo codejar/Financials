@@ -7,9 +7,10 @@
                       xmlns:dockablz="clr-namespace:Dragablz.Dockablz;assembly=Dragablz"
                       xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
                       xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+                      FontFamily="pack://application:,,,/Financials.Wpf;component/Resources/Roboto/#Roboto"
                       EnableDWMDropShadow="True"
                       WindowTransitionsEnabled="False"
-                      Title="Financials" Height="300" Width="300">
+                      Title="Financials" Height="500" Width="600">
     <dockablz:Layout>
         <dragablz:TabablzControl ItemsSource="{Binding Contents}" HeaderMemberPath="Header">
             <dragablz:TabablzControl.InterTabController>
@@ -17,7 +18,7 @@
             </dragablz:TabablzControl.InterTabController>
             <dragablz:TabablzControl.ContentTemplate>
                 <DataTemplate DataType="dragablz:HeaderedItemViewModel">
-                    <ContentControl Content="{Binding Content}" />
+                    <ContentControl Content="{Binding Content}" Margin="8" />
                 </DataTemplate>
             </dragablz:TabablzControl.ContentTemplate>
         </dragablz:TabablzControl>

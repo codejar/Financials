@@ -36,6 +36,11 @@ namespace Financials.Wpf
                 Header = "MARKET",
                 Content = container.GetInstance<MarketDataViewer>()
             });
+            tabSet.Contents.Add(new HeaderedItemViewModel
+            {
+                Header = "ABOUT",
+                Content = container.GetInstance<About>()
+            });
             mainWindow.Show();
 
             //run start up jobs
