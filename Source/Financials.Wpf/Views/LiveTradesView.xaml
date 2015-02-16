@@ -7,7 +7,7 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:views="clr-namespace:Financials.Wpf.Views"
              mc:Ignorable="d" 
-                 d:DataContext="{d:DesignInstance  views:NearToMarketViewer, IsDesignTimeCreatable=False}"
+             d:DataContext="{d:DesignInstance  views:NearToMarketViewer, IsDesignTimeCreatable=False}"
              d:DesignHeight="300" d:DesignWidth="300">
 
     <UserControl.Resources>

@@ -18,6 +18,7 @@ namespace Financials.Wpf.Infrastucture
             log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(path));
 
             For<ILogger>().Use<Log4NetLogger>().Ctor<Type>("type").Is(x => x.RootType);
+
             For<ISchedulerProvider>().Singleton().Use<SchedulerProvider>();
             For<IObjectProvider>().Singleton().Use<ObjectProvider>();
             For<ITradeService>().Singleton().Use<TradeService>();
@@ -25,8 +26,6 @@ namespace Financials.Wpf.Infrastucture
             For<IMarketDataService>().Singleton().Use<MarketDataService>();
             For<INearToMarketService>().Singleton().Use<NearToMarketService>();
             
-
-           
             For<TradePriceUpdateJob>().Singleton();
 
             Scan(scanner => scanner.LookForRegistries());

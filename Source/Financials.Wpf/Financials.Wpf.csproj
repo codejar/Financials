@@ -105,36 +105,27 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BootStrap.cs" />
-    <Compile Include="IntertabClient.cs" />
-    <Compile Include="TraderWindow.xaml.cs">
-      <DependentUpon>TraderWindow.xaml</DependentUpon>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TraderWindowFactory.cs" />
-    <Compile Include="TraderWindowModel.cs" />
+    <Compile Include="TabSet.cs" />
     <Compile Include="Views\LiveTradesView.xaml.cs">
       <DependentUpon>LiveTradesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LiveTradesViewer.cs" />
     <Compile Include="Views\MarketDataTicker.cs" />
     <Compile Include="Views\MarketDataViewer.cs" />
-    <Compile Include="Views\MenuView.xaml.cs">
-      <DependentUpon>MenuView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\MarketDataView.xaml.cs">
       <DependentUpon>MarketDataView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infrastucture\AppRegistry.cs" />
-    <Compile Include="Infrastucture\BooleanToVisibilityConverter.cs" />
     <Compile Include="Infrastucture\Command.cs" />
     <Compile Include="Infrastucture\HyperlinkExtensions.cs" />
     <Compile Include="Infrastucture\Link.cs" />
     <Compile Include="Infrastucture\Log4NetLogger.cs" />
-    <Compile Include="Infrastucture\MenuItem.cs" />
-    <Compile Include="Infrastucture\MenuItems.cs" />
     <Compile Include="Infrastucture\ObjectProvider.cs" />
-    <Compile Include="Infrastucture\ViewContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -167,15 +158,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="TraderWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="MainWindow.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LiveTradesView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\MenuView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
