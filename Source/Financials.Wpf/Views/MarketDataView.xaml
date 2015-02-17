@@ -3,92 +3,43 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-            xmlns:views="clr-namespace:Financials.Wpf.Views"
-            mc:Ignorable="d" 
-                 d:DataContext="{d:DesignInstance views:MarketDataViewer, IsDesignTimeCreatable=False}"
-             d:DesignHeight="300" d:DesignWidth="300">
-    
+             xmlns:views="clr-namespace:Financials.Wpf.Views"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance views:MarketDataViewer, IsDesignTimeCreatable=False}"
+             d:DesignHeight="300" d:DesignWidth="300">    
     <UserControl.Resources>
-        <ResourceDictionary>
+        <ResourceDictionary>            
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ListBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+            </ResourceDictionary.MergedDictionaries>        
             <DataTemplate DataType="{x:Type views:MarketDataTicker}">
-                <Grid Margin="8">
-                    
-                    <Grid.Resources>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Setter Property="HorizontalAlignment" Value="Center"/>
-                        </Style>
-                        
-                    </Grid.Resources>
-                    
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-
+                <Grid>                    
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="180"/>                        
                     </Grid.ColumnDefinitions>
-
-                    <TextBlock 
-                        Grid.ColumnSpan="2"
-                        FontSize="20"
-                        Text="{Binding CurrencyPair.Code, Mode=OneTime}"/>
-
-                    <StackPanel Grid.Row="1" Grid.Column="0">
-
-                        <TextBlock Text="Buy"/>
-                        
-                        <TextBlock  Margin="4 4 0 0"
-                                FontSize="16"
-                                Text="{Binding  Bid}"/>
-                    </StackPanel>
-
-
-                    <StackPanel  Grid.Row="1" Grid.Column="1">
-
-                        <TextBlock Text="Sell"/>
-
-                        <TextBlock 
-                                Margin="4 4 0 0"
-                                FontSize="16"
-                                Text="{Binding  Offer}"/>
-                    </StackPanel>
-
-                    <StackPanel
-                        Width="50"
-                        VerticalAlignment="Center"
-                                Grid.Row="0" Grid.RowSpan="2" Grid.Column="2">
-
-                        <TextBlock Text="trend"/>
-
-
-                        <TextBlock 
-                                Margin="4 4 0 0"
-                                FontSize="16"
-                                Text="{Binding  Trend}"/>
-
-                    </StackPanel>
-
-                </Grid>
-                
+                    <Border Background="{DynamicResource PrimaryHueLightBrush}" TextBlock.Foreground="{DynamicResource PrimaryHueLightForegroundBrush}">
+                        <TextBlock FontSize="16" Text="{Binding Trend}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <StackPanel Grid.Column="1" Margin="8" HorizontalAlignment="Center">
+                        <TextBlock FontSize="20" Text="{Binding CurrencyPair.Code, Mode=OneTime}" HorizontalAlignment="Center"/>    
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Text="{Binding Bid, StringFormat={}{0:0.0000} Bid}"/>
+                            <TextBlock Text="{Binding Offer, StringFormat=Offer {0:0.0000}}" Margin="8 0 0 0"/>
+                        </StackPanel>                        
+                    </StackPanel>                    
+                </Grid>                
             </DataTemplate>
-        </ResourceDictionary>
-        
-    </UserControl.Resources>
-    
-    <Grid>
-        
-        <ItemsControl ItemsSource="{Binding  Prices}">
-
+        </ResourceDictionary>        
+    </UserControl.Resources>    
+    <Grid>        
+        <ListBox Style="{StaticResource MaterialDesignCardsListBox}" ItemsSource="{Binding  Prices}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>            
-        </ItemsControl>
- 
-            
+        </ListBox>            
     </Grid>
 </UserControl>
