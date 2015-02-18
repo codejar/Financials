@@ -133,7 +133,6 @@
   <ItemGroup>
     <Compile Include="Infrastucture\AppRegistry.cs" />
     <Compile Include="Infrastucture\Command.cs" />
-    <Compile Include="Infrastucture\Link.cs" />
     <Compile Include="Infrastucture\Log4NetLogger.cs" />
     <Compile Include="Infrastucture\ObjectProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

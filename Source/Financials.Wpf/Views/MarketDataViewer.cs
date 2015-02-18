@@ -10,7 +10,6 @@ namespace Financials.Wpf.Views
     public class MarketDataViewer: IDisposable
     {
         private readonly IEnumerable<MarketDataTicker> _prices;
-      
         private readonly IDisposable _cleanUp;
 
         public MarketDataViewer(IStaticData staticData, IMarketDataService marketDataService)
@@ -34,8 +33,7 @@ namespace Financials.Wpf.Views
         {
             get { return _prices; }
         }
-
-
+        
         public void Dispose()
         {
           _cleanUp.Dispose();

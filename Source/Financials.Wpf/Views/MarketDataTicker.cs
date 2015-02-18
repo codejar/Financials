@@ -25,7 +25,6 @@ namespace Financials.Wpf.Views
                     Bid = md.Bid;
                     Offer = md.Offer;
                 });
-
         }
 
         public CurrencyPair CurrencyPair
@@ -50,8 +49,6 @@ namespace Financials.Wpf.Views
             get { return _offer; }
             set { SetAndRaise(ref _offer, value); }
         }
-
-
 
         public void Dispose()
         {
