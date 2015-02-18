@@ -111,6 +111,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BootStrap.cs" />
+    <Compile Include="Infrastucture\InterfaceConventions.cs" />
+    <Compile Include="Infrastucture\JobConventions.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -131,7 +133,6 @@
   <ItemGroup>
     <Compile Include="Infrastucture\AppRegistry.cs" />
     <Compile Include="Infrastucture\Command.cs" />
-    <Compile Include="Infrastucture\HyperlinkExtensions.cs" />
     <Compile Include="Infrastucture\Link.cs" />
     <Compile Include="Infrastucture\Log4NetLogger.cs" />
     <Compile Include="Infrastucture\ObjectProvider.cs" />
@@ -174,7 +175,6 @@
     <Resource Include="Resources\Roboto\RobotoCondensed-Light.ttf" />
     <Resource Include="Resources\Roboto\RobotoCondensed-LightItalic.ttf" />
     <Resource Include="Resources\Roboto\RobotoCondensed-Regular.ttf" />
-    <None Include="_packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

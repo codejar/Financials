@@ -19,14 +19,16 @@ namespace Financials.Wpf.Infrastucture
 
             For<ILogger>().Use<Log4NetLogger>().Ctor<Type>("type").Is(x => x.RootType);
 
-            For<ISchedulerProvider>().Singleton().Use<SchedulerProvider>();
-            For<IObjectProvider>().Singleton().Use<ObjectProvider>();
-            For<ITradeService>().Singleton().Use<TradeService>();
-            For<IStaticData>().Singleton().Use<StaticData>();
-            For<IMarketDataService>().Singleton().Use<MarketDataService>();
-            For<INearToMarketService>().Singleton().Use<NearToMarketService>();
+            Scan(scanner =>
+            {
             
-            For<TradePriceUpdateJob>().Singleton();
+                scanner.LookForRegistries();
+                scanner.Convention<InterfaceConventions>();
+                scanner.Convention<JobConventions>();
+                scanner.ExcludeType<ILogger>();
+                scanner.AssemblyContainingType<AppRegistry>();
+                scanner.AssemblyContainingType<TradeService>();
+            });
 
             Scan(scanner => scanner.LookForRegistries());
         }
