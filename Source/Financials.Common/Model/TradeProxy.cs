@@ -11,6 +11,8 @@ namespace Financials.Common.Model
         private readonly IDisposable _cleanUp;
         private bool _recent;
         private readonly long _id;
+        private decimal _marketPrice;
+        private decimal _pcFromMarketPrice;
 
         public TradeProxy(Trade trade)
         {
@@ -32,8 +34,8 @@ namespace Financials.Common.Model
             var priceRefresher = trade.MarketPriceChanged
                 .Subscribe(_ =>
                            {
-                               OnPropertyChanged("MarketPrice");
-                               OnPropertyChanged("PercentFromMarket");
+                               MarketPrice = trade.MarketPrice;
+                               PercentFromMarket = trade.PercentFromMarket;
                            });
 
             _cleanUp = new CompositeDisposable(recentIndicator, priceRefresher);
@@ -41,23 +43,20 @@ namespace Financials.Common.Model
 
         public decimal MarketPrice
         {
-            get { return _trade.MarketPrice; }
+            get { return _marketPrice; }
+            set { SetAndRaise(ref _marketPrice, value); }
         }
 
         public decimal PercentFromMarket
         {
-            get { return _trade.PercentFromMarket; }
+            get { return _pcFromMarketPrice; }
+            set { SetAndRaise(ref _pcFromMarketPrice, value); }
         }
 
         public bool Recent
         {
             get { return _recent; }
-            set
-            {
-                if (_recent==value) return;
-                _recent = value;
-                OnPropertyChanged();
-            }
+            set { SetAndRaise(ref _recent, value); }
         }
 
         public Trade Trade

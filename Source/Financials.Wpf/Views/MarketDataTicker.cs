@@ -16,8 +16,6 @@ namespace Financials.Wpf.Views
         {
             if (currencyPair == null) throw new ArgumentNullException("currencyPair");
             if (marketDataObservable == null) throw new ArgumentNullException("marketDataObservable");
-
-
             _currencyPair = currencyPair;
 
             _cleanUp = marketDataObservable.
