@@ -35,8 +35,7 @@ namespace Financials.Common.Services
                         observer.OnNext(initial);
 
                         var random = new Random();
-
-
+         
                         //for a given period, move prices by up to 5 pips
                         return Observable.Interval(TimeSpan.FromSeconds(1 / (double)currencyPair.TickFrequency))
                             .Select(_ =>  random.Next(1, 5))
@@ -44,7 +43,7 @@ namespace Financials.Common.Services
                             {
                                 //move up or down between 1 and 5 pips
                                 var adjustment = Math.Round(pips * currencyPair.PipSize,currencyPair.DecimalPlaces);
-                                currentPrice = random.NextDouble() > 0.5
+                                currentPrice = random.NextBoolean()
                                                 ? currentPrice + adjustment
                                                 : currentPrice - adjustment;
                                 observer.OnNext(currentPrice);

@@ -75,15 +75,12 @@
     <Compile Include="Model\MarketData.cs" />
     <Compile Include="Model\Trend.cs" />
     <Compile Include="Services\IMarketDataService.cs" />
-    <Compile Include="Services\INearToMarketService.cs" />
     <Compile Include="Infrastucture\NotifyPropertyChangedBase.cs" />
     <Compile Include="Infrastucture\Extensions.cs" />
     <Compile Include="Infrastucture\ILogger.cs" />
     <Compile Include="Infrastucture\IObjectFactory.cs" />
     <Compile Include="Infrastucture\ISchedulerProvider.cs" />
-    <Compile Include="Services\INotificationPublisher.cs" />
     <Compile Include="Services\IStaticData.cs" />
-    <Compile Include="Services\NearToMarketService.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Services\StaticData.cs" />
     <Compile Include="Services\TradeGenerator.cs" />

@@ -41,10 +41,10 @@ namespace Financials.Common.Services
             var random = new Random();
 
             //initally load some trades 
-            _tradesSource.AddOrUpdate(_tradeGenerator.Generate(10000, true));
+            _tradesSource.AddOrUpdate(_tradeGenerator.Generate(5000, true));
 
             Func<TimeSpan> randomInterval = () => {
-                                                        var ms = random.Next(150, 5000);
+                                                        var ms = random.Next(1000, 10000);
                                                         return TimeSpan.FromMilliseconds(ms);
                                                     };
 

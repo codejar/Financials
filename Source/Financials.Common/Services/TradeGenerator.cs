@@ -67,8 +67,7 @@ namespace Financials.Common.Services
             var price = _latestPrices.Lookup(currencyPair.Code)
                                 .ConvertOr(md=>md.Bid, () => currencyPair.InitialPrice);
 
-
-            //generate percent price 1-100 pips away from the inital market
+            //generate percent price 1-100 pips away from the market
             var pipsFromMarket = _random.Next(1, 100);
             var adjustment = Math.Round(pipsFromMarket * currencyPair.PipSize, currencyPair.DecimalPlaces);
             return buyOrSell==BuyOrSell.Sell ? price + adjustment : price - adjustment;
