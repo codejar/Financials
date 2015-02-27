@@ -5,21 +5,13 @@ namespace Financials.Common.Infrastucture
 {
     public class SchedulerProvider : ISchedulerProvider
     {
-        private readonly IScheduler _dispatcher;
-
-        public SchedulerProvider(Dispatcher dispatcher)
+	    public SchedulerProvider(Dispatcher dispatcher)
         {
-            _dispatcher = new DispatcherScheduler(dispatcher);
+            Dispatcher = new DispatcherScheduler(dispatcher);
         }
 
-        public IScheduler Dispatcher
-        {
-            get { return _dispatcher; }
-        }
+        public IScheduler Dispatcher { get; }
 
-        public IScheduler TaskPool
-        {
-            get { return TaskPoolScheduler.Default; }
-        }
+	    public IScheduler TaskPool => TaskPoolScheduler.Default;
     }
 }

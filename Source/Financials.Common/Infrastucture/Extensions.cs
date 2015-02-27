@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Reactive;
 using System.Reactive.Linq;
 
-// ReSharper disable once CheckNamespace
-namespace System
+namespace Financials.Common.Infrastucture
 {
-    public static class Extensions
+	public static class Extensions
     {
         public static IObservable<Unit> ToUnit<T>(this IObservable<T> source)
         {

@@ -7,8 +7,7 @@ namespace Financials.Common.Model
 {
     public class TradeProxy:NotifyPropertyChangedBase, IDisposable, IEquatable<TradeProxy>
     {
-        private readonly Trade _trade;
-        private readonly IDisposable _cleanUp;
+	    private readonly IDisposable _cleanUp;
         private bool _recent;
         private readonly long _id;
         private decimal _marketPrice;
@@ -17,7 +16,7 @@ namespace Financials.Common.Model
         public TradeProxy(Trade trade)
         {
             _id = trade.Id;
-            _trade = trade;
+            Trade = trade;
 
             var isRecent = DateTime.Now.Subtract(trade.Timestamp).TotalSeconds < 2;
             var recentIndicator= Disposable.Empty;
@@ -44,13 +43,13 @@ namespace Financials.Common.Model
         public decimal MarketPrice
         {
             get { return _marketPrice; }
-            set { SetAndRaise(ref _marketPrice, value); }
+	        private set { SetAndRaise(ref _marketPrice, value); }
         }
 
         public decimal PercentFromMarket
         {
             get { return _pcFromMarketPrice; }
-            set { SetAndRaise(ref _pcFromMarketPrice, value); }
+	        private set { SetAndRaise(ref _pcFromMarketPrice, value); }
         }
 
         public bool Recent
@@ -59,12 +58,9 @@ namespace Financials.Common.Model
             set { SetAndRaise(ref _recent, value); }
         }
 
-        public Trade Trade
-        {
-            get { return _trade; }
-        }
+        public Trade Trade { get; }
 
-        #region Equaility Members
+	    #region Equaility Members
 
         public bool Equals(TradeProxy other)
         {

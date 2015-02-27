@@ -15,7 +15,7 @@ namespace Financials.Common.Infrastucture
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+	        handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         protected virtual void SetAndRaise<T>(ref T backingField, T newValue, [CallerMemberName] string propertyName = null)

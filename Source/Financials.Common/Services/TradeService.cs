@@ -81,12 +81,9 @@ namespace Financials.Common.Services
 
         }
         
-        public IObservableCache<Trade, long> Trades
-        {
-            get { return _tradesCache; }
-        }
+        public IObservableCache<Trade, long> Trades => _tradesCache;
 
-        public void Dispose()
+	    public void Dispose()
         {
             _cleanup.Dispose();
         }

@@ -6,8 +6,7 @@ namespace Financials.Wpf.Views
 {
     public class MarketDataTicker : NotifyPropertyChangedBase, IDisposable
     {
-        private readonly CurrencyPair _currencyPair;
-        private readonly IDisposable _cleanUp;
+	    private readonly IDisposable _cleanUp;
         private decimal _bid;
         private decimal _offer;
         private Trend _trend;
@@ -16,7 +15,7 @@ namespace Financials.Wpf.Views
         {
             if (currencyPair == null) throw new ArgumentNullException("currencyPair");
             if (marketDataObservable == null) throw new ArgumentNullException("marketDataObservable");
-            _currencyPair = currencyPair;
+            CurrencyPair = currencyPair;
 
             _cleanUp = marketDataObservable.
                 Subscribe(md =>
@@ -27,12 +26,9 @@ namespace Financials.Wpf.Views
                 });
         }
 
-        public CurrencyPair CurrencyPair
-        {
-            get { return _currencyPair; }
-        }
+        public CurrencyPair CurrencyPair { get; }
 
-        public Trend Trend
+	    public Trend Trend
         {
             get { return _trend; }
             set { SetAndRaise(ref _trend, value); }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Financials.Common.Infrastucture;
 using StructureMap.Graph;
 using StructureMap.TypeRules;
 using StructureMap.Configuration.DSL;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reactive.Linq;
 using DynamicData.Kernel;
+using Financials.Common.Infrastucture;
 using Financials.Common.Model;
 
 

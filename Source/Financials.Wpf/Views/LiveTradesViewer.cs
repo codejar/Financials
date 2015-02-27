@@ -26,12 +26,12 @@ namespace Financials.Wpf.Views
         {
             _logger = logger;
 
-            var filterApplier = this.ObserveChanges()
-                                .Throttle(TimeSpan.FromMilliseconds(250)).ToUnit()   
-                                .StartWith(Unit.Default)
-                                .Subscribe(_ => ApplyFilter());
+			var filterApplier = this.PropertyValueChanged(t => t.SearchText)
+				.Throttle(TimeSpan.FromMilliseconds(250))
+				.Select(propargs => BuildFilter(propargs.Value))
+				.Subscribe(_filter.Change);
 
-            var loader = tradeService.Trades.Connect(trade => trade.Status == TradeStatus.Live) //prefilter live trades only
+			var loader = tradeService.Trades.Connect(trade => trade.Status == TradeStatus.Live) //prefilter live trades only
                 .Filter(_filter) // apply user filter
                 .Transform(trade => new TradeProxy(trade),new ParallelisationOptions(ParallelType.Ordered,5))
                 .Sort(SortExpressionComparer<TradeProxy>.Descending(t => t.Trade.Timestamp),SortOptimisations.ComparesImmutableValuesOnly)
@@ -43,20 +43,15 @@ namespace Financials.Wpf.Views
             _cleanUp = new CompositeDisposable(loader, _filter, filterApplier);
         }
 
-        private void ApplyFilter()
-        {
-            _logger.Info("Applying filter");
-            if (string.IsNullOrEmpty(SearchText))
-            {
-                _filter.ChangeToIncludeAll();
-            }
-            else
-            {
-                _filter.Change(t => t.CurrencyPair.Contains(SearchText,StringComparison.OrdinalIgnoreCase) ||
-                                    t.Customer.Contains(SearchText, StringComparison.OrdinalIgnoreCase));
-            }
-            _logger.Info("Applied filter");
-        }
+		private Func<Trade, bool> BuildFilter(string searchText)
+		{
+			_logger.Info("Building filter for {0}", searchText);
+			if (string.IsNullOrEmpty(searchText))
+				return trade => true;
+
+			return t => t.CurrencyPair.Contains(searchText, StringComparison.OrdinalIgnoreCase) ||
+											t.Customer.Contains(searchText, StringComparison.OrdinalIgnoreCase);
+		}
 
         public string SearchText
         {
@@ -64,12 +59,9 @@ namespace Financials.Wpf.Views
             set  { SetAndRaise(ref _searchText,value);}
         }
 
-        public IObservableCollection<TradeProxy> Data
-        {
-            get { return _data; }
-        }
+        public IObservableCollection<TradeProxy> Data => _data;
 
-        public void Dispose()
+	    public void Dispose()
         {
             _cleanUp.Dispose();
         }
