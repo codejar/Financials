@@ -95,7 +95,7 @@
     <Compile Include="Services\StaticData.cs" />
     <Compile Include="Services\TradeGenerator.cs" />
     <Compile Include="Services\TradeGeneratorJob.cs" />
-    <Compile Include="Services\TradeManagementQuasiService.cs" />
+    <Compile Include="Services\TradeManagementService.cs" />
     <Compile Include="Services\TradePriceUpdateJob.cs" />
     <Compile Include="Services\ITradeService.cs" />
     <Compile Include="Services\MarketDataService.cs" />
