@@ -45,8 +45,9 @@ namespace Financials.Wpf
 
             //run start up jobs
             var priceUpdater = container.GetInstance<TradePriceUpdateJob>();
+			var tradeGenerator = container.GetInstance<TradeGeneratorJob>();
 
-            app.Run();
+			app.Run();
 
             priceUpdater.Dispose();
         }

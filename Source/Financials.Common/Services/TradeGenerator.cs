@@ -2,14 +2,26 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Threading;
 using DynamicData.Kernel;
 using Financials.Common.Infrastucture;
 using Financials.Common.Model;
 
 namespace Financials.Common.Services
 {
-    public class TradeGenerator: IDisposable
-    {
+	public interface ITradeGenerator : IDisposable
+	{
+		IEnumerable<Trade> Generate(int numberToGenerate, bool initialLoad = false);
+		
+		/// <summary>
+		/// Generates the next available trade id.
+		/// </summary>
+		/// <returns></returns>
+		int NextId();
+	}
+
+	public class TradeGenerator: ITradeGenerator
+	{
         private readonly Random _random= new Random();
         private readonly IStaticData _staticData;
         private readonly IDisposable _cleanUp;
@@ -32,11 +44,17 @@ namespace Financials.Common.Services
 
         }
 
-        public IEnumerable<Trade> Generate(int numberToGenerate, bool initialLoad = false)
+
+	    public int NextId()
+	    {
+			return Interlocked.Increment(ref _counter);
+	    }
+
+		public IEnumerable<Trade> Generate(int numberToGenerate, bool initialLoad = false)
         {
             Func<Trade> newTrade = () =>
             {
-                var id = _counter++;
+                var id = NextId();
                 var bank = _staticData.Customers[_random.Next(0, _staticData.Customers.Length)];
                 var pair = _staticData.CurrencyPairs[_random.Next(0, _staticData.CurrencyPairs.Length)];
                 var amount = (_random.Next(1, 2000) / 2) * (10 ^ _random.Next(1, 5));
@@ -44,7 +62,7 @@ namespace Financials.Common.Services
                 
                 if (initialLoad)
                 {
-                    var status = _random.NextDouble() > 0.5 ? TradeStatus.Live : TradeStatus.Closed;
+                    var status = _random.NextDouble() > 0.5 ? TradeStatus.Live : TradeStatus.Cancelled;
                     var seconds = _random.Next(1, 60 * 60 * 24);
                     var time = DateTime.Now.AddSeconds(-seconds);
                     return new Trade(id, bank, pair.Code, status, buySell, GererateRandomPrice(pair, buySell), amount, timeStamp: time);
@@ -74,7 +92,9 @@ namespace Financials.Common.Services
             return buyOrSell==BuyOrSell.Sell ? price + adjustment : price - adjustment;
         }
 
-        public void Dispose()
+
+
+		public void Dispose()
         {
             _cleanUp.Dispose();
         }

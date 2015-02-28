@@ -6,5 +6,6 @@ namespace Financials.Common.Services
     public interface ITradeService
     {
         IObservableCache<Trade, long> Trades { get; }
+
     }
 }

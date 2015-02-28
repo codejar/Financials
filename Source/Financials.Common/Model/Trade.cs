@@ -8,41 +8,42 @@ namespace Financials.Common.Model
     {
         private readonly ISubject<decimal> _marketPriceChangedSubject = new ReplaySubject<decimal>(1); 
         
-        public long Id { get; private set; }
-        public string CurrencyPair { get; private set; }
-        public string Customer { get; private set; }
-        public decimal TradePrice { get; private set; }
+        public long Id { get; }
+        public string CurrencyPair { get; }
+        public string Customer { get; }
+        public decimal TradePrice { get; }
         public decimal MarketPrice { get; private set; }
         public decimal PercentFromMarket { get; private set; }
-        public decimal Amount { get; private set; }
-        public BuyOrSell BuyOrSell { get; private set; }
-        public TradeStatus Status { get; private set; }
-        public DateTime Timestamp { get; private set; }
+        public decimal Amount { get; }
+        public BuyOrSell BuyOrSell { get; }
+        public TradeStatus Status { get; }
+        public DateTime Timestamp { get; }
 
         public Trade(Trade trade, TradeStatus status)
         {
             Id = trade.Id;
             Customer = trade.Customer;
-            CurrencyPair = trade.CurrencyPair;
+			CurrencyPair = trade.CurrencyPair;
             Status = status;
-            MarketPrice = trade.MarketPrice;
+	        CurrencyPair = trade.CurrencyPair;
+	        MarketPrice = trade.MarketPrice;
             TradePrice = trade.TradePrice;
             Amount = trade.Amount;
             Timestamp = DateTime.Now;
             BuyOrSell = trade.BuyOrSell;
         }
 
-        public Trade(long id, string customer, string currencyPair, TradeStatus status, BuyOrSell buyOrSell, decimal tradePrice, decimal amount, decimal marketPrice = 0, DateTime? timeStamp = null)
+        public Trade(long id, string customer, string currencyPair, TradeStatus status, BuyOrSell buyOrSell, decimal tradePrice, decimal amount,  decimal marketPrice = 0, DateTime? timeStamp = null)
         {
             Id = id;
             Customer = customer;
-            CurrencyPair = currencyPair;
+			CurrencyPair = currencyPair;
             Status = status;
             MarketPrice = marketPrice;
             TradePrice = tradePrice;
             Amount = amount;
-            BuyOrSell = buyOrSell;
-            Timestamp =timeStamp.HasValue ? timeStamp.Value : DateTime.Now;
+	        BuyOrSell = buyOrSell;
+            Timestamp =timeStamp ?? DateTime.Now;
         }
 
         public void SetMarketPrice(decimal marketPrice)
@@ -50,16 +51,12 @@ namespace Financials.Common.Model
             MarketPrice = marketPrice;
    
             PercentFromMarket = Math.Round(((TradePrice - MarketPrice) / MarketPrice) * 100, 2);
-            ;
             _marketPriceChangedSubject.OnNext(marketPrice);
         }
 
-        public IObservable<decimal> MarketPriceChanged
-        {
-            get { return _marketPriceChangedSubject.AsObservable(); }
-        }
+        public IObservable<decimal> MarketPriceChanged => _marketPriceChangedSubject.AsObservable();
 
-        #region Equality Members
+	    #region Equality Members
 
         public bool Equals(Trade other)
         {

@@ -10,14 +10,15 @@ namespace Financials.Wpf.Views
 {
     public class MarketDataViewer: IDisposable
     {
+	    private readonly ITradeManagementService _tradeManagementService;
 	    private readonly IDisposable _cleanUp;
 
 		public IEnumerable<MarketDataTicker> Prices { get; }
 
-		public MarketDataViewer(IStaticData staticData, IMarketDataService marketDataService)
+		public MarketDataViewer(IStaticData staticData, 
+			IMarketDataService marketDataService)
         {
-
-            Prices = staticData.CurrencyPairs.Select(currencypair =>
+			Prices = staticData.CurrencyPairs.Select(currencypair =>
             {
                 var observable = marketDataService.Watch(currencypair.Code);
                 return new MarketDataTicker(currencypair, observable);

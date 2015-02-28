@@ -2,6 +2,7 @@
 using System.IO;
 using StructureMap.Configuration.DSL;
 using Financials.Common.Infrastucture;
+using Financials.Common.Model;
 using Financials.Common.Services;
 
 namespace Financials.Wpf.Infrastucture
@@ -19,7 +20,14 @@ namespace Financials.Wpf.Infrastucture
 
             For<ILogger>().Use<Log4NetLogger>().Ctor<Type>("type").Is(x => x.RootType);
 
-            Scan(scanner =>
+			//alas I think structuremap is in a league of it's own re: dependency injection.
+			//however how can I do the following generically for all types? I do not know.
+			//please jeremydmiller help!! https://groups.google.com/forum/#!topic/structuremap-users/6udUPHCmxN0
+			For<MessageBroker<Trade>>().Singleton();
+			Forward<MessageBroker<Trade>, IMessagePublisher<Trade>>();
+			Forward<MessageBroker<Trade>, IMessageListener<Trade>>();
+
+			Scan(scanner =>
             {
             
                 scanner.LookForRegistries();
