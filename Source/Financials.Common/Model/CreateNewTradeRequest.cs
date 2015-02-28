@@ -1,7 +1,6 @@
 using System;
-using Financials.Common.Model;
 
-namespace Financials.Common.Infrastucture
+namespace Financials.Common.Model
 {
 	public class CreateNewTradeRequest
 	{

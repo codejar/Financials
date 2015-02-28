@@ -79,7 +79,7 @@
     <Compile Include="Model\CurrencyPair.cs" />
     <Compile Include="Model\MarketData.cs" />
     <Compile Include="Model\Trend.cs" />
-    <Compile Include="Infrastucture\CreateNewTradeRequest.cs" />
+    <Compile Include="Model\CreateNewTradeRequest.cs" />
     <Compile Include="Services\IMarketDataService.cs" />
     <Compile Include="Infrastucture\NotifyPropertyChangedBase.cs" />
     <Compile Include="Infrastucture\Extensions.cs" />
@@ -89,9 +89,9 @@
     <Compile Include="Services\IStaticData.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Services\ITradeManagementService.cs" />
-    <Compile Include="Infrastucture\ServerError.cs" />
-    <Compile Include="Infrastucture\ServerResponse.cs" />
-    <Compile Include="Infrastucture\ServiceException.cs" />
+    <Compile Include="Model\ServerError.cs" />
+    <Compile Include="Model\ServerResponse.cs" />
+    <Compile Include="Model\ServiceException.cs" />
     <Compile Include="Services\StaticData.cs" />
     <Compile Include="Services\TradeGenerator.cs" />
     <Compile Include="Services\TradeGeneratorJob.cs" />

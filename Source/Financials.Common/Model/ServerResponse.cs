@@ -1,4 +1,4 @@
-namespace Financials.Common.Infrastucture
+namespace Financials.Common.Model
 {
 	public class ServerResponse<T>
 		where T :class 

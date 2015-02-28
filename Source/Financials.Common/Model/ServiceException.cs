@@ -1,6 +1,6 @@
 using System;
 
-namespace Financials.Common.Infrastucture
+namespace Financials.Common.Model
 {
 	public class ServiceException : Exception
 	{
