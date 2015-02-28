@@ -35,7 +35,7 @@ namespace Financials.Wpf.Infrastucture
                 scanner.Convention<JobConventions>();
                 scanner.ExcludeType<ILogger>();
                 scanner.AssemblyContainingType<AppRegistry>();
-                scanner.AssemblyContainingType<TradeService>();
+                scanner.AssemblyContainingType<TradesCache>();
             });
 
             Scan(scanner => scanner.LookForRegistries());

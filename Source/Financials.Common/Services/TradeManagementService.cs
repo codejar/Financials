@@ -9,19 +9,19 @@ namespace Financials.Common.Services
 	/// <summary>
 	/// Ficticious trade management service. This is the hook where a real world code example would go to a server / web api.
 	/// But in this demo, we are not trying to show you beautiful people how to speak to a server. 
-	/// Such things are standard and loads of examples elsewhere!
+	/// Such things are well documented with examples elsewhere!
 	/// </summary>
 	public class TradeManagementService : ITradeManagementService
 	{
-		private readonly ITradeService _tradeService;
+		private readonly ITradesCache _tradesCache;
 		private readonly ITradeGenerator _tradeGenerator;
 		private readonly IMessagePublisher<Trade> _messagePublisher;
 
-		public TradeManagementService(ITradeService tradeService,
+		public TradeManagementService(ITradesCache tradesCache,
 			ITradeGenerator tradeGenerator,
 			IMessagePublisher<Trade> messagePublisher )
 		{
-			_tradeService = tradeService;
+			_tradesCache = tradesCache;
 			_tradeGenerator = tradeGenerator;
 			_messagePublisher = messagePublisher;
 		}
@@ -33,7 +33,7 @@ namespace Financials.Common.Services
 				//simulate latency 
 				Thread.Sleep(TimeSpan.FromMilliseconds(250));
 
-				var trade = _tradeService.Trades.Lookup(tradeId);
+				var trade = _tradesCache.Trades.Lookup(tradeId);
 				if (!trade.HasValue)
 					return new ServerResponse<Trade>(string.Format("Cannot cancel. Trade {0} does not exist", tradeId));
 
@@ -51,7 +51,7 @@ namespace Financials.Common.Services
 				//simulate latency 
 				Thread.Sleep(TimeSpan.FromMilliseconds(250));
 
-				var trade = _tradeService.Trades.Lookup(tradeId);
+				var trade = _tradesCache.Trades.Lookup(tradeId);
 				if (!trade.HasValue)
 					return new ServerResponse<Trade>(string.Format("Cannot execute. Trade {0} does not exist", tradeId));
 

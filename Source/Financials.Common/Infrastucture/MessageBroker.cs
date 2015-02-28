@@ -16,4 +16,7 @@ namespace Financials.Common.Infrastucture
 
 		public IObservable<T> Messages => _messages.AsObservable();
 	}
+
+
+
 }

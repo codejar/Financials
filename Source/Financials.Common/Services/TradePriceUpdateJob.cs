@@ -12,9 +12,9 @@ namespace Financials.Common.Services
     {
         private readonly IDisposable _job;
 
-        public TradePriceUpdateJob(ITradeService tradeService, IMarketDataService marketDataService)
+        public TradePriceUpdateJob(ITradesCache tradesCache, IMarketDataService marketDataService)
         {
-            _job = tradeService.Trades.Connect()
+            _job = tradesCache.Trades.Connect()
                 .Filter(trade => trade.Status == TradeStatus.Live)
                 .Group(trade => trade.CurrencyPair)
                 .SubscribeMany(groupedData =>

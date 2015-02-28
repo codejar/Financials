@@ -7,18 +7,23 @@ using Financials.Common.Model;
 
 namespace Financials.Common.Services
 {
+	/// <summary>
+	/// Job to generate random trades, starting with an inital batch.
+	/// 
+	/// Used to simulate a rapaidly moving data
+	/// </summary>
 	public class TradeGeneratorJob : IDisposable
 	{
 		private readonly IMessagePublisher<Trade> _publisher;
 		private readonly ITradeGenerator _tradeGenerator;
-		private readonly  Lazy<ITradeService>  _tradeService;
+		private readonly  Lazy<ITradesCache>  _tradeService;
 		private readonly ISchedulerProvider _schedulerProvider;
 		private readonly ILogger _logger;
 		private readonly IDisposable _runner;
 
 		public TradeGeneratorJob(IMessagePublisher<Trade> publisher,
 			ITradeGenerator tradeGenerator, 
-			Lazy<ITradeService> tradeService,
+			Lazy<ITradesCache> tradeService,
 			ISchedulerProvider schedulerProvider,
 			ILogger logger)
 		{
@@ -40,9 +45,10 @@ namespace Financials.Common.Services
 			var initial = _tradeGenerator.Generate(5000, true);
 			initial.ForEach(_publisher.Publish);
 
-			Func<TimeSpan> randomInterval = () => {
-				                                      var ms = random.Next(1000, 10000);
-				                                      return TimeSpan.FromMilliseconds(ms);
+			Func<TimeSpan> randomInterval = () =>
+			{
+				var ms = random.Next(1000, 10000);
+				return TimeSpan.FromMilliseconds(ms);
 			};
 
 			// create a random number of new trades at a random interval

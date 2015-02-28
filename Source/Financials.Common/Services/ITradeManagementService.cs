@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using Financials.Common.Infrastucture;
 using Financials.Common.Model;
 
 namespace Financials.Common.Services

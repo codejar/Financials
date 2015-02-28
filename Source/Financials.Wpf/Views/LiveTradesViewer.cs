@@ -21,7 +21,7 @@ namespace Financials.Wpf.Views
 		public IObservableCollection<TradeProxy> Data { get; } = new ObservableCollectionExtended<TradeProxy>();
 
 	
-		public LiveTradesViewer(ITradeService tradeService, 
+		public LiveTradesViewer(ITradesCache tradesCache, 
 									ILogger logger, 
 									ISchedulerProvider schedulerProvider,
 									ITradeManagementService tradeManagementService									)
@@ -33,7 +33,7 @@ namespace Financials.Wpf.Views
 				.Select(propargs => BuildFilter(propargs.Value))
 				.Subscribe(_filter.Change);
 			
-			var loader = tradeService.Trades.Connect(trade => trade.Status == TradeStatus.Live) //prefilter live trades only
+			var loader = tradesCache.Trades.Connect(trade => trade.Status == TradeStatus.Live) //prefilter live trades only
                 .Filter(_filter) // apply user filter
                 .Transform(trade => new TradeProxy(trade),new ParallelisationOptions(ParallelType.Ordered,5))
                 .Sort(SortExpressionComparer<TradeProxy>.Descending(t => t.Trade.Timestamp),SortOptimisations.ComparesImmutableValuesOnly)
