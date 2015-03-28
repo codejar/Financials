@@ -4,6 +4,17 @@ using System.Reactive.Subjects;
 
 namespace Financials.Common.Infrastucture
 {
+	public interface IMessagePublisher
+	{
+		void Publish<T>(T message);
+	}
+
+	public interface IMessageListener
+	{
+		IObservable<T> Listen<T>();
+	}
+
+
 	public class MessageBroker<T> : IMessagePublisher<T>, IMessageListener<T>
 	{
 		private readonly ISubject<T> _messages = new Subject<T>();

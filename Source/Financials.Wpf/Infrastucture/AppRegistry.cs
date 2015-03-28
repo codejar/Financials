@@ -20,9 +20,7 @@ namespace Financials.Wpf.Infrastucture
 
             For<ILogger>().Use<Log4NetLogger>().Ctor<Type>("type").Is(x => x.RootType);
 
-			//alas I think structuremap is in a league of it's own re: dependency injection.
-			//however how can I do the following generically for all types? I do not know.
-			//please jeremydmiller help!! https://groups.google.com/forum/#!topic/structuremap-users/6udUPHCmxN0
+
 			For<MessageBroker<Trade>>().Singleton();
 			Forward<MessageBroker<Trade>, IMessagePublisher<Trade>>();
 			Forward<MessageBroker<Trade>, IMessageListener<Trade>>();

@@ -16,12 +16,11 @@ namespace Financials.Common.Services
 	        if (messageListener == null) throw new ArgumentNullException("messageListener");
 
 			// IMessageListener <Trade> acts as the back end for this example.
-			// Take the observable and convert it into an observable cache
 			Trades = messageListener.Messages
-				.Buffer(TimeSpan.FromMilliseconds(50))	//add a small buffer so inital (about 10000) trades are batched
+				.Buffer(TimeSpan.FromMilliseconds(50))	//add a small buffer so inital load (about 5000-10000) trades are batched
 				.Where(buffer=> buffer.Count!=0)		//I hate the fact that empty buffers produce a notification
 				.ToObservableChangeSet(trade=>trade.Id) //convert this into a dynamic data observable
-				.AsObservableCache();					//materialise the observable
+				.AsObservableCache();					//cache it
 
 			_cleanup = Trades;
         }

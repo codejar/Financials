@@ -29,9 +29,7 @@ namespace Financials.Wpf.Views
             {
                 Prices.OfType<IDisposable>().ForEach(d=>d.Dispose());
             });
-
         }
-
 
 	    public void Dispose()
         {

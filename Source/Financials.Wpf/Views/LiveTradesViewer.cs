@@ -23,8 +23,7 @@ namespace Financials.Wpf.Views
 	
 		public LiveTradesViewer(ITradesCache tradesCache, 
 									ILogger logger, 
-									ISchedulerProvider schedulerProvider,
-									ITradeManagementService tradeManagementService									)
+									ISchedulerProvider schedulerProvider)
         {
             _logger = logger;
 
